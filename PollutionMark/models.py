@@ -6,7 +6,7 @@ from django.db import models
 class PollutionMark(models.Model):
     headline = models.CharField(verbose_name='Заголовок', max_length=100, help_text='Заголовок сообщения')
     full_description = models.CharField(verbose_name='Описание', max_length=600, null=True, blank=True, help_text='Подробное описание проблемы')
-    full_photoURL = models.FileField(verbose_name='Изображение', upload_to='media/images', null=True, blank=True)
+    full_photoURL = models.FileField(verbose_name='Изображение', upload_to='images', null=True, blank=True)
     longitude = models.FloatField(verbose_name='Долгота', null=True, blank=True, help_text='Долгота')
     latitude = models.FloatField(verbose_name='Широта', null=True, blank=True, help_text='Широта')
     created_at = models.DateTimeField(auto_now_add=True)
