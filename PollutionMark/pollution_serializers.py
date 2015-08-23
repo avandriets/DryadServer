@@ -10,11 +10,9 @@ class PollutionMarkSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = PollutionMark
-        fields = ('id', 'headline', 'full_description', 'full_photoURL', 'longitude', 'latitude', 'created_at', 'username','first_name', 'last_name', 'user_id')
+        fields = ('id', 'headline', 'full_description', 'full_photoURL', 'longitude', 'latitude', 'attitude', 'created_at', 'username','first_name', 'last_name', 'user_id')
 
     def create(self, validated_data):
-        #user_data = validated_data.pop(u'user', self.context['request'].user)
-        #,self.context['request'].user
         mark = super(PollutionMarkSerializer, self).create(validated_data)
         mark.user = self.context['request'].user
         mark.save()

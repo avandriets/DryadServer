@@ -9,6 +9,7 @@ class PollutionMark(models.Model):
     full_photoURL = models.FileField(verbose_name='Изображение', upload_to='images', null=True, blank=True)
     longitude = models.FloatField(verbose_name='Долгота', null=True, blank=True, help_text='Долгота')
     latitude = models.FloatField(verbose_name='Широта', null=True, blank=True, help_text='Широта')
+    attitude = models.FloatField(verbose_name='Высота', null=True, blank=True, help_text='Высота')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)
