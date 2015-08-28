@@ -13,7 +13,8 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from PollutionMark import views
+from PollutionMark.views import PollutionMarkViewSet
+from PicturesOfObjects.views import PicturesOfObjectsViewSet
 import apiusr.views
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -21,7 +22,8 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'PollutionMark', views.PollutionMarkViewSet)
+router.register(r'PollutionMark', PollutionMarkViewSet)
+router.register(r'PicturesOfObjects', PicturesOfObjectsViewSet)
 router.register(r'accounts', apiusr.views.UserView, 'list')
 
 
