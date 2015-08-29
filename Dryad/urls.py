@@ -15,7 +15,7 @@ Including another URLconf
 """
 from PollutionMark.views import PollutionMarkViewSet
 from PicturesOfObjects.views import PicturesOfObjectsViewSet
-from Vote.views import VoteViewSet
+from VoteUsers.views import VoteViewSet
 import apiusr.views
 from django.conf.urls import include, url
 from django.contrib import admin

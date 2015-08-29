@@ -1,5 +1,5 @@
-from Vote.models import Vote
-from Vote.vote_serializers import VoteSerializer
+from VoteUsers.models import Vote
+from VoteUsers.vote_serializers import VoteSerializer
 from rest_framework import filters
 from rest_framework import viewsets
 

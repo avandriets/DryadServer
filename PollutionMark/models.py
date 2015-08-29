@@ -1,6 +1,8 @@
 # coding=utf-8
+import VoteUsers
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Sum
 
 TYPE_OF_RECORD = ((1, 'Фотофакт'), (2, 'Инициатива'), (3, 'Гражданский проект'))
 
@@ -15,6 +17,20 @@ class PollutionMark(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)
+
+    @property
+    def vote_yes(self):
+        count = VoteUsers.models.Vote.objects.filter(pollution_mark=self).aggregate(Sum('vote_yes'))
+        if count['vote_yes__sum'] is None:
+            return 0
+        return count['vote_yes__sum']
+
+    @property
+    def vote_no(self):
+        count = VoteUsers.models.Vote.objects.filter(pollution_mark=self).aggregate(Sum('vote_no'))
+        if count['vote_no__sum'] is None:
+            return 0
+        return count['vote_no__sum']
 
     class Meta:
         db_table = 'PollutionMark'

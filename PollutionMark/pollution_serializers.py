@@ -8,14 +8,14 @@ class PollutionMarkSerializer(serializers.ModelSerializer):
     first_name = serializers.ReadOnlyField(source='user.first_name',    required=False)
     last_name = serializers.ReadOnlyField(source='user.last_name',      required=False)
     pictures = PicturesOfObjectsSerializer(many=True, read_only=True,   required=False)
-    vote_yes = serializers.IntegerField(source='vote.count', read_only=True)
+    #vote_yes = serializers.IntegerField(source='vote.sum', read_only=True)
 
     class Meta:
         model = PollutionMark
         fields = ('id', 'headline', 'full_description', 'longitude',
                   'latitude', 'attitude', 'created_at', 'updated_at',
                   'username','first_name', 'last_name',
-                  'user_id', 'type', 'pictures', 'vote_yes')
+                  'user_id', 'type', 'pictures', 'vote_yes', 'vote_no')
 
     def create(self, validated_data):
         mark = super(PollutionMarkSerializer, self).create(validated_data)

@@ -1,6 +1,6 @@
 __author__ = 'AVAndriets'
 
-from Vote.models import Vote
+from VoteUsers.models import Vote
 from rest_framework import serializers
 
 class VoteSerializer(serializers.ModelSerializer):
