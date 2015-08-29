@@ -15,6 +15,7 @@ Including another URLconf
 """
 from PollutionMark.views import PollutionMarkViewSet
 from PicturesOfObjects.views import PicturesOfObjectsViewSet
+from Vote.views import VoteViewSet
 import apiusr.views
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -24,6 +25,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'PollutionMark', PollutionMarkViewSet)
 router.register(r'PicturesOfObjects', PicturesOfObjectsViewSet)
+router.register(r'Vote', VoteViewSet)
 router.register(r'accounts', apiusr.views.UserView, 'list')
 
 
