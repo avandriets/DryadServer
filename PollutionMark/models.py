@@ -13,7 +13,7 @@ class PollutionMark(models.Model):
     longitude = models.FloatField(verbose_name='Долгота', null=True, blank=True, help_text='Долгота')
     latitude = models.FloatField(verbose_name='Широта', null=True, blank=True, help_text='Широта')
     attitude = models.FloatField(verbose_name='Высота', null=True, blank=True, help_text='Высота')
-    type = models.IntegerField(choices=TYPE_OF_RECORD, default=1)
+    type = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)
