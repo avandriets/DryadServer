@@ -1,12 +1,14 @@
 # coding=utf-8
 from PollutionMark.models import PollutionMark
 from PollutionMark.pollution_serializers import PollutionMarkSerializer
+from gcm.models import get_device_model
 from rest_framework import filters
 from rest_framework import viewsets
 import datetime
+from rest_framework.renderers import JSONRenderer
+
 
 class PollutionMarkViewSet(viewsets.ModelViewSet):
-
     queryset = PollutionMark.objects.all()
     serializer_class = PollutionMarkSerializer
 
@@ -26,7 +28,27 @@ class PollutionMarkViewSet(viewsets.ModelViewSet):
 
         if updated_at_val is not None:
             long_value = long(float(updated_at_val))
-            queryset = queryset.filter(updated_at__gt=datetime.datetime.fromtimestamp(long_value/1e3))
+            queryset = queryset.filter(updated_at__gt=datetime.datetime.fromtimestamp(long_value / 1e3))
 
-        #return super(PollutionMarkViewSet, self).filter_queryset(queryset)
+        # return super(PollutionMarkViewSet, self).filter_queryset(queryset)
         return queryset
+
+    def create(self, request, *args, **kwargs):
+        created_object = super(PollutionMarkViewSet, self).create(request, *args, **kwargs)
+
+        # point = PollutionMark.objects.get(pk=created_object.data['id'])
+        # serializer = PollutionMarkSerializer(point)
+        # array = [serializer.data]
+        # content = JSONRenderer().render(array)
+
+        device = get_device_model()
+        device.objects.all().send_message({'NewPoint': created_object.data['id']})
+
+        return created_object
+
+    def destroy(self, request, *args, **kwargs):
+
+        device = get_device_model()
+        device.objects.all().send_message({'DeletePoint': kwargs['pk']})
+
+        return super(PollutionMarkViewSet, self).destroy(request, *args, **kwargs)

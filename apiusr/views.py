@@ -10,7 +10,7 @@ class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     model = User
- 
+
     def get_permissions(self):
 
         # allow non-authenticated user to create via POST
